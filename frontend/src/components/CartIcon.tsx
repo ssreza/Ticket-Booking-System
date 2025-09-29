@@ -11,6 +11,7 @@ const CartIcon = ({ itemCount, onClick }: CartIconProps) => {
       onClick={onClick}
       className="relative p-2 text-gray-700 hover:text-blue-600 transition-colors"
       aria-label="Shopping cart"
+      data-testid="cart-icon"
     >
       {/* Cart Icon SVG */}
       <svg 

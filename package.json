@@ -1,0 +1,20 @@
+{
+  "name": "ticket-booking-system",
+  "version": "1.0.0",
+  "description": "Concert Ticket Booking System with API Tests",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.15.5",
+    "pg": "^8.16.3",
+    "typescript": "^5.9.2"
+  }
+}

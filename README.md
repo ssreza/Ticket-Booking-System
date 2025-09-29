@@ -325,17 +325,30 @@ k6 run --vus 500 --duration 30s load-test.js
 
 ## 🧪 Testing
 
+### API Tests (Automated)
+
+**13 comprehensive API tests** covering all endpoints:
+
+```bash
+# Run all tests
+bun run test
+
+# Interactive mode
+bun run test:ui
+```
+
+**Test Coverage:**
+- ✅ Catalog API (2 tests)
+- ✅ Booking API (6 tests) - includes concurrency tests
+- ✅ Orders API (5 tests)
+
+See `TEST_GUIDE.md` for detailed testing instructions.
+
 ### Manual Testing
 1. Test booking flow with multiple users
 2. Verify cart operations
 3. Check order history
 4. Test concurrent bookings (open multiple tabs)
-
-### Suggested Test Cases
-- Unit tests for business logic (Jest)
-- Integration tests for API endpoints (Supertest)
-- Load testing (k6, Artillery)
-- Database transaction tests
 
 ---
 
