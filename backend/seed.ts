@@ -9,24 +9,25 @@ export async function seedDatabase() {
     console.log('🌱 Starting database seeding...');
     
     // Insert initial tickets with conflict handling
+    // Matching assignment requirements: VIP=$100, Front Row=$50, GA=$10
     const seedData = [
       {
-        tier: 'VIP',
+        tier: 'VIP' as const,
         priceUsd: '100.00',
-        quantityAvailable: 10,
-        totalQuantity: 10,
+        quantityAvailable: 100, // Reasonable inventory for 500 concurrent users
+        totalQuantity: 100,
       },
       {
-        tier: 'FRONT_ROW', 
+        tier: 'FRONT_ROW' as const, 
         priceUsd: '50.00',
-        quantityAvailable: 50,
-        totalQuantity: 50,
-      },
-      {
-        tier: 'GA',
-        priceUsd: '10.00', 
         quantityAvailable: 200,
         totalQuantity: 200,
+      },
+      {
+        tier: 'GA' as const,
+        priceUsd: '10.00', 
+        quantityAvailable: 500,
+        totalQuantity: 500,
       },
     ];
 

@@ -1,10 +1,13 @@
-import { pgTable, serial, varchar, numeric, integer, uuid, timestamp } from 'drizzle-orm/pg-core';
+import { pgTable, serial, varchar, numeric, integer, uuid, timestamp, pgEnum } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
+
+// Define ticket tiers as enum for type safety
+export const ticketTierEnum = pgEnum('ticket_tier', ['VIP', 'FRONT_ROW', 'GA']);
 
 // Tickets (Inventory) Table
 export const tickets = pgTable('tickets', {
   id: serial('id').primaryKey(),
-  tier: varchar('tier', { length: 50 }).unique().notNull(), // VIP, FRONT_ROW, GA
+  tier: ticketTierEnum('tier').unique().notNull(), // VIP, FRONT_ROW, GA
   priceUsd: numeric('price_usd', { precision: 10, scale: 2 }).notNull(),
   quantityAvailable: integer('quantity_available').notNull(), // Critical field for locking
   totalQuantity: integer('total_quantity').notNull(),
@@ -23,7 +26,7 @@ export const orders = pgTable('orders', {
 export const orderItems = pgTable('order_items', {
   id: serial('id').primaryKey(),
   orderId: uuid('order_id').references(() => orders.id, { onDelete: 'cascade' }).notNull(),
-  ticketTier: varchar('ticket_tier', { length: 50 }).notNull(),
+  ticketTier: ticketTierEnum('ticket_tier').notNull(),
   quantity: integer('quantity').notNull(),
   priceAtPurchase: numeric('price_at_purchase', { precision: 10, scale: 2 }).notNull(),
 });
