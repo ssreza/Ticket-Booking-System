@@ -1,24 +1,26 @@
 import { Pool } from 'pg';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { eq, sql } from 'drizzle-orm';
 import * as schema from './schema.js';
 
-// Configuration for the PostgreSQL connection pool
-// Using hardcoded values that match the docker-compose.yml configuration
+/**
+ * PostgreSQL Connection Pool Configuration
+ * Configured to match docker-compose.yml settings
+ */
 const pool = new Pool({
   user: 'user',
   password: 'password',
   host: 'localhost',
   port: 5432,
   database: 'ticketdb',
-  // High concurrency setting: Adjust pool size based on expected load
-  // 20 is a good starting point for moderate concurrent users
-  max: 20, 
-  idleTimeoutMillis: 30000, // Close idle connections after 30 seconds
-  connectionTimeoutMillis: 2000, // Error after 2 seconds if unable to connect
+  max: 20, // Support ~500 concurrent users with proper pooling
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
 });
 
-// Initialize Drizzle ORM with the connection pool
+/**
+ * Drizzle ORM instance
+ * Provides type-safe database queries
+ */
 export const db = drizzle(pool, { schema });
 
 // Test the connection on startup
